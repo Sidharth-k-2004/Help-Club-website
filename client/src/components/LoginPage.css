@@ -1,0 +1,123 @@
+/* Overall Page Styling */
+.login-page {
+    display: flex;
+    height: 100vh;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  /* Logo Styling */
+  .logo {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .logo img {
+    width: 150px;
+    height: auto;
+  }
+  .logo h5 {
+    font-family: "poppins";
+    font-size: 30px;
+    color: rgb(216, 116, 70);
+  }
+  
+  /* Hand Image on the Right */
+  .hand-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+  
+  .hand-image img {
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Container Styling */
+  .container {
+    margin: auto;
+    /* background-color: #f7d54f;  */
+    border: 4px solid #efef44;
+    padding: 40px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Styling */
+  .login-heading {
+    text-align: center;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Remember Me Checkbox Styling */
+  .remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .remember-me label {
+    margin-left: 10px;
+    color: #555;
+  }
+  
+  /* Login Button Styling */
+  .login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .login-btn:hover {
+    background-color: #555;
+  }
+  
+  /* Signup and Forgot Password Links */
+  .signup, .forgot-password {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .signup a, .forgot-password a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .signup a:hover, .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
