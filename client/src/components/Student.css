@@ -1,0 +1,51 @@
+.student-query-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    height: 100px;
+    margin-right: 10px;
+  }
+  
+  .query-section {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .queries-display {
+    width: 50%;
+  }
+  
+  .query-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .message {
+    color: green;
+  }
+  
