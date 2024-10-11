@@ -1,4 +1,4 @@
-.student-query-page {
+/* .student-query-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,4 +48,109 @@
   .message {
     color: green;
   }
-  
+   */
+
+
+   .query-page {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.help-logo {
+    width: 50px; /* Adjust the size of the logo */
+    margin-right: 20px;
+}
+
+.page-title {
+    font-size: 24px;
+    color: #333;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #444;
+}
+
+.query-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.query-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+.loading, .error {
+    font-size: 18px;
+    color: #f00; /* Error message color */
+}
+
+.query-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.query-card h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.query-card p {
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .query-page {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .help-logo {
+        width: 40px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    .query-input {
+        font-size: 14px;
+    }
+
+    .submit-button {
+        font-size: 14px;
+    }
+}

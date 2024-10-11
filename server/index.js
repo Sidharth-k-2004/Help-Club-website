@@ -464,6 +464,56 @@ app.get('/student-queries', async (req, res) => {
     }
 });
 
+// Middleware to verify JWT
+// const authenticateToken = (req, res, next) => {
+//     const token = req.headers['authorization'];
+//     if (!token) return res.status(401).json({ message: 'Token is missing' });
+
+//     try {
+//         const decoded = jwt.verify(token, JWT_SECRET); // Verify token
+//         req.user = decoded; // Attach decoded user info to request object
+//         next(); // Proceed to the next middleware or route
+//     } catch (error) {
+//         return res.status(403).json({ message: 'Invalid or expired token' });
+//     }
+// };
+
+// // Post a query (Authenticated route)
+// app.post('/post-query', authenticateToken, async (req, res) => {
+//     const { queryText } = req.body;
+//     const userId = req.user.id;
+
+//     try {
+//         // Find the user and add the query
+//         await User.findByIdAndUpdate(userId, {
+//             $push: { queries: { queryText, replyText: null } }
+//         });
+
+//         res.status(201).json({ message: 'Query posted successfully' });
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error posting query', error });
+//     }
+// });
+
+// // Fetch all queries by the logged-in user (Authenticated route)
+// app.get('/student-queries', authenticateToken, async (req, res) => {
+//     const userId = req.user.id;
+
+//     try {
+//         const user = await User.findById(userId);
+//         console.log(user);
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         const userQueries = user.queries;
+//         res.status(200).json(userQueries);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error fetching queries', error });
+//     }
+// });
+
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
