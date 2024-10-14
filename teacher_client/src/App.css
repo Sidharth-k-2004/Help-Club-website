@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "BlackboardRegular";   /*Can be any text*/
+  src: local("BlackboardRegular"),
+    url("./fonts/KgBrokenVesselsSketch-zx1w.ttf") format("truetype");
+}
