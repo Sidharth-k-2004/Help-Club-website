@@ -1,156 +1,214 @@
-/* .student-query-page {
+  body {
+    font-family: 'Kalam', cursive;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  
+
+  
+  .query-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .query-page img{
+    margin-left: 0px;
+  }
+  
+  .header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-  }
-  
-  .logo-section {
-    display: flex;
-    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
+    font-family: BlackboardRegular;
+    color: black;
+    font-size: 5rem;
+    
   }
   
-  .logo {
-    height: 100px;
-    margin-right: 10px;
+  .help-logo {
+    width: 12%;
+    height: 12%;
+    margin-right: 20px;
   }
   
-  .query-section {
-    width: 50%;
-    margin-bottom: 20px;
+  .page-title {
+    font-size: 24px;
+    color: #333;
   }
   
-  textarea {
+  h2 {
+    color: #444;
+    margin-top: 30px;
+  }
+  
+  .query-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  
+  .query-input {
     width: 100%;
-    height: 100px;
+    height: 100px; /* Fixed height */
+    padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none; /* Disable resizing */
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+    background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
+    background-size: 100% 2em;
+    line-height: 2em;
+    padding-top: 0.5em;
   }
   
-  button {
+  .submit-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .board-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    --dot-bg: beige;
+    --dot-color: black;
+    --dot-size: 1px;
+    --dot-space: 22px;
+    background:
+        linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+        linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+        var(--dot-color);
+    width: 100%;
+    height: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-top: 3rem;
+  }
+  
+  .sticky-container {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
     cursor: pointer;
   }
   
-  .queries-display {
-    width: 50%;
+  .sticky-outer {
+    perspective: 1000px;
   }
   
-  .query-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  .sticky {
+    transform: rotate(2deg);
+    transition: transform 0.3s;
   }
   
-  .message {
-    color: green;
+  .sticky:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 2;
   }
-   */
-
-
-   .query-page {
-    max-width: 100%;
-    margin: 20px auto;
+  
+  .sticky-content {
+    background: linear-gradient(
+      180deg,
+      rgba(187, 235, 255, 1) 0%,
+      rgba(187, 235, 255, 1) 12%,
+      rgba(170, 220, 241, 1) 75%,
+      rgba(195, 229, 244, 1) 100%
+    );
     padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.help-logo {
-    width: 50px; /* Adjust the size of the logo */
-    margin-right: 20px;
-}
-
-.page-title {
-    font-size: 24px;
-    color: #333;
-}
-
-h2 {
-    margin-top: 20px;
-    color: #444;
-}
-
-.query-form {
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    min-height: 200px;
+  }
+  
+  .sticky-info-layout {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.query-input {
-    width: 100%;
-    padding: 10px;
+  }
+  
+  .sticky-info-head {
+    font-size: 18px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
-}
-
-.submit-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
+    color: #333;
+  }
+  
+  .sticky-info {
+    margin-bottom: 10px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .error {
+    color: #d32f2f;
+  }
+  
+  /* Popup styles */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-    background-color: #218838;
-}
-
-.loading, .error {
-    font-size: 18px;
-    color: #f00; /* Error message color */
-}
-
-.query-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-}
-
-.query-card h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-}
-
-.query-card p {
-    margin: 5px 0;
-}
-
-@media (max-width: 600px) {
-    .query-page {
-        margin: 10px;
-        padding: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .sticky-container {
+      width: calc(50% - 20px);
     }
-
-    .help-logo {
-        width: 40px;
+  }
+  
+  @media (max-width: 480px) {
+    .sticky-container {
+      width: 100%;
     }
-
-    .page-title {
-        font-size: 20px;
-    }
-
-    .query-input {
-        font-size: 14px;
-    }
-
-    .submit-button {
-        font-size: 14px;
-    }
-}
+  }

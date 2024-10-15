@@ -2,283 +2,252 @@
 
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
-// import './Student.css'; // Import CSS file for styles
+// import './Student.css';
 
-// const StudentQueryPage = () => {
-//     const [queries, setQueries] = useState([]); // Initialize with an empty array
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(null);
-//     const [newQuery, setNewQuery] = useState(''); // State for the new query input
-//     const [isSubmitting, setIsSubmitting] = useState(false);
+// export default function StudentQueryPage() {
+//   const [queries, setQueries] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [newQuery, setNewQuery] = useState('');
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [selectedQuery, setSelectedQuery] = useState(null);
 
-//     useEffect(() => {
-//         const fetchQueries = async () => {
-//             try {
-//                 const response = await axios.get('http://localhost:5000/student-queries');
-//                 setQueries(response.data);
-//             } catch (err) {
-//                 setError(err.message);
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchQueries();
-//     }, []);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setIsSubmitting(true);
-
-//         try {
-//             const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
-//             setQueries([...queries, response.data]);
-//             setNewQuery('');
-//         } catch (err) {
-//             setError(err.message);
-//         } finally {
-//             setIsSubmitting(false);
-//         }
-//     };
-
-//     if (loading) {
-//         return <div className="loading">Loading...</div>;
+//   const fetchQueries = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await axios.get('http://localhost:5000/student-queries');
+//       console.log("Fetched Queries:", response.data);
+//       setQueries(response.data);
+//     } catch (err) {
+//       setError(err.message);
+//     } finally {
+//       setLoading(false);
 //     }
+//   };
 
-//     if (error) {
-//         return <div className="error">Error fetching queries: {error}</div>;
+//   useEffect(() => {
+//     fetchQueries();
+//   }, []);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     try {
+//       const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
+//       console.log("Response from Post:", response.data);
+//       setNewQuery('');
+//       fetchQueries();
+//     } catch (err) {
+//       setError(err.message);
+//     } finally {
+//       setIsSubmitting(false);
 //     }
+//   };
 
-//     const displayQueries = Array.isArray(queries) ? queries : [];
+//   const openPopup = (query) => {
+//     setSelectedQuery(query);
+//   };
 
-//     return (
-//         <div className="query-page">
-//             <div className="header">
-//                 <img src="Images/Help-Logo.jpg" alt="Help Logo" className="help-logo" /> {/* Replace with your logo path */}
-//                 <h1 className="page-title">Student Query Page</h1>
-//             </div>
-//             <h2>Submit a New Query</h2>
-//             <form onSubmit={handleSubmit} className="query-form">
-//                 <textarea
-//                     value={newQuery}
-//                     onChange={(e) => setNewQuery(e.target.value)}
-//                     placeholder="Enter your query here"
-//                     rows="4"
-//                     required
-//                     className="query-input"
-//                 />
-//                 <button type="submit" disabled={isSubmitting} className="submit-button">
-//                     {isSubmitting ? 'Submitting...' : 'Submit Query'}
-//                 </button>
-//             </form>
+//   const closePopup = () => {
+//     setSelectedQuery(null);
+//   };
 
-//             <h1>Your Past Queries</h1>
-//             {displayQueries.length > 0 ? (
-//                 displayQueries.map((query, index) => (
-//                     <div key={index} className="query-card">
-//                         <h2>Query {index + 1}</h2>
-//                         <p><strong>Query:</strong> {query.queryText}</p>
-//                         <p><strong>Reply:</strong> {query.replyText}</p>
+//   if (loading) {
+//     return <div className="loading">Loading...</div>;
+//   }
+
+//   if (error) {
+//     return <div className="error">Error fetching queries: {error}</div>;
+//   }
+
+//   const displayQueries = Array.isArray(queries) ? queries : [];
+
+//   return (
+//     <div className="query-page">
+//       <div className="header">
+//         <img src="Images/Help-Logo.jpg" alt="Help Logo" className="help-logo" />
+//         <h1 className="page-title">Student Query Page</h1>
+//       </div>
+//       <h2>Submit a New Query</h2>
+//       <form onSubmit={handleSubmit} className="query-form">
+//         <textarea
+//           value={newQuery}
+//           onChange={(e) => setNewQuery(e.target.value)}
+//           placeholder="Enter your query here"
+//           rows="4"
+//           required
+//           className="query-input"
+//         />
+//         <button type="submit" disabled={isSubmitting} className="submit-button">
+//           {isSubmitting ? 'Submitting...' : 'Submit Query'}
+//         </button>
+//       </form>
+
+//       <h1>Your Past Queries</h1>
+//       <div className="board-layout">
+//         {displayQueries.length > 0 ? (
+//           displayQueries.map((query, index) => (
+//             <div key={index} className="sticky-container" onClick={() => openPopup(query)}>
+//               <div className="sticky-outer">
+//                 <div className="sticky">
+//                   <div className="sticky-content">
+//                     <div className="sticky-info-layout">
+//                       <h2 className="sticky-info-head">Query {index + 1}</h2>
+//                       <div className="sticky-info">
+//                         <strong>Query:</strong> {query.queryText}
+//                       </div>
+//                       <div className="sticky-info">
+//                         <strong>Reply:</strong> {query.replyText ? query.replyText : 'No reply yet.'}
+//                       </div>
 //                     </div>
-//                 ))
-//             ) : (
-//                 <p>No past queries found.</p>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default StudentQueryPage;
-
-
-
-
-
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import './Student.css'; // Import CSS file for styles
-
-// const StudentQueryPage = () => {
-//     const [queries, setQueries] = useState([]); // Initialize with an empty array
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(null);
-//     const [newQuery, setNewQuery] = useState(''); // State for the new query input
-//     const [isSubmitting, setIsSubmitting] = useState(false);
-
-//     // Function to fetch queries from the backend
-//     const fetchQueries = async () => {
-//         setLoading(true); // Start loading
-//         try {
-//             const response = await axios.get('http://localhost:5000/student-queries');
-//             setQueries(response.data); // Set the fetched queries
-//         } catch (err) {
-//             setError(err.message); // Capture the error message
-//         } finally {
-//             setLoading(false); // Set loading to false in either case
-//         }
-//     };
-
-//     useEffect(() => {
-//         fetchQueries(); // Fetch queries when the component mounts
-//     }, []);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setIsSubmitting(true);
-
-//         try {
-//             const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
-//             setNewQuery(''); // Clear the input field after submission
-//             // Fetch the queries again after a new query has been submitted
-//             fetchQueries();
-//         } catch (err) {
-//             setError(err.message); // Handle errors during submission
-//         } finally {
-//             setIsSubmitting(false);
-//         }
-//     };
-
-//     if (loading) {
-//         return <div className="loading">Loading...</div>; // Show loading indicator
-//     }
-
-//     if (error) {
-//         return <div className="error">Error fetching queries: {error}</div>; // Show error message
-//     }
-
-//     const displayQueries = Array.isArray(queries) ? queries : [];
-
-//     return (
-//         <div className="query-page">
-//             <div className="header">
-//                 <img src="Images/Help-Logo.jpg" alt="Help Logo" className="help-logo" /> {/* Replace with your logo path */}
-//                 <h1 className="page-title">Student Query Page</h1>
+//                   </div>
+//                 </div>
+//               </div>
 //             </div>
-//             <h2>Submit a New Query</h2>
-//             <form onSubmit={handleSubmit} className="query-form">
-//                 <textarea
-//                     value={newQuery}
-//                     onChange={(e) => setNewQuery(e.target.value)}
-//                     placeholder="Enter your query here"
-//                     rows="4"
-//                     required
-//                     className="query-input"
-//                 />
-//                 <button type="submit" disabled={isSubmitting} className="submit-button">
-//                     {isSubmitting ? 'Submitting...' : 'Submit Query'}
-//                 </button>
-//             </form>
+//           ))
+//         ) : (
+//           <p>No past queries found.</p>
+//         )}
+//       </div>
 
-//             <h1>Your Past Queries</h1>
-//             {displayQueries.length > 0 ? (
-//                 displayQueries.map((query, index) => (
-//                     <div key={index} className="query-card">
-//                         <h2>Query {index + 1}</h2>
-//                         <p><strong>Query:</strong> {query.queryText}</p>
-//                         <p><strong>Reply:</strong> {query.replyText}</p>
-//                     </div>
-//                 ))
-//             ) : (
-//                 <p>No past queries found.</p>
-//             )}
+//       {selectedQuery && (
+//         <div className="popup-overlay" onClick={closePopup}>
+//           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+//             <span className="popup-close" onClick={closePopup}>&times;</span>
+//             <h2>Query {displayQueries.indexOf(selectedQuery) + 1}</h2>
+//             <p><strong>Query:</strong> {selectedQuery.queryText}</p>
+//             <p><strong>Reply:</strong> {selectedQuery.replyText || 'No reply yet.'}</p>
+//           </div>
 //         </div>
-//     );
-// };
-
-// export default StudentQueryPage;
+//       )}
+//     </div>
+//   );
+// }
 
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Student.css'; // Import CSS file for styles
+import './Student.css';
 
-const StudentQueryPage = () => {
-    const [queries, setQueries] = useState([]); // Initialize with an empty array
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [newQuery, setNewQuery] = useState(''); // State for the new query input
-    const [isSubmitting, setIsSubmitting] = useState(false);
+export default function StudentQueryPage() {
+  const [queries, setQueries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [newQuery, setNewQuery] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedQuery, setSelectedQuery] = useState(null);
 
-    // Function to fetch queries from the backend
-    const fetchQueries = async () => {
-        setLoading(true); // Start loading
-        try {
-            const response = await axios.get('http://localhost:5000/student-queries');
-            console.log("Fetched Queries:", response.data); // Log the fetched queries
-            setQueries(response.data); // Set the fetched queries
-        } catch (err) {
-            setError(err.message); // Capture the error message
-        } finally {
-            setLoading(false); // Set loading to false in either case
-        }
-    };
-
-    useEffect(() => {
-        fetchQueries(); // Fetch queries when the component mounts
-    }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
-        try {
-            const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
-            console.log("Response from Post:", response.data); // Log the response
-            setNewQuery(''); // Clear the input field after submission
-            // Fetch the queries again after a new query has been submitted
-            fetchQueries();
-        } catch (err) {
-            setError(err.message); // Handle errors during submission
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (loading) {
-        return <div className="loading">Loading...</div>; // Show loading indicator
+  const fetchQueries = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('http://localhost:5000/student-queries');
+      console.log("Fetched Queries:", response.data);
+      setQueries(response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (error) {
-        return <div className="error">Error fetching queries: {error}</div>; // Show error message
+  useEffect(() => {
+    fetchQueries();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
+      console.log("Response from Post:", response.data);
+      
+      // Update the queries state with the new query
+      setQueries(prevQueries => [response.data, ...prevQueries]);
+      
+      setNewQuery('');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSubmitting(false);
     }
+  };
 
-    const displayQueries = Array.isArray(queries) ? queries : [];
+  const openPopup = (query) => {
+    setSelectedQuery(query);
+  };
 
-    return (
-        <div className="query-page">
-            <div className="header">
-                <img src="Images/Help-Logo.jpg" alt="Help Logo" className="help-logo" />
-                <h1 className="page-title">Student Query Page</h1>
-            </div>
-            <h2>Submit a New Query</h2>
-            <form onSubmit={handleSubmit} className="query-form">
-                <textarea
-                    value={newQuery}
-                    onChange={(e) => setNewQuery(e.target.value)}
-                    placeholder="Enter your query here"
-                    rows="4"
-                    required
-                    className="query-input"
-                />
-                <button type="submit" disabled={isSubmitting} className="submit-button">
-                    {isSubmitting ? 'Submitting...' : 'Submit Query'}
-                </button>
-            </form>
+  const closePopup = () => {
+    setSelectedQuery(null);
+  };
 
-            <h1>Your Past Queries</h1>
-            {displayQueries.length > 0 ? (
-                displayQueries.map((query, index) => (
-                    <div key={index} className="query-card">
-                        <h2>Query {index + 1}</h2>
-                        <p><strong>Query:</strong> {query.queryText}</p>
-                        <p><strong>Reply:</strong> {query.replyText}</p>
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">Error fetching queries: {error}</div>;
+  }
+
+  const displayQueries = Array.isArray(queries) ? queries : [];
+
+  return (
+    <div className="query-page">
+      <div className="header">
+        {/* <img src="Images/Help-Logo.jpg" alt="Help Logo" className="help-logo" /> */}
+        <h1 className="page-title" >Student Query Page</h1>
+      </div>
+      <h2>Query?</h2>
+      <form onSubmit={handleSubmit} className="query-form">
+        <textarea
+          value={newQuery}
+          onChange={(e) => setNewQuery(e.target.value)}
+          placeholder="Enter your query here"
+          rows="4"
+          required
+          className="query-input"
+        />
+        <button type="submit" disabled={isSubmitting} className="submit-button">
+          {isSubmitting ? 'Submitting...' : 'Submit Query'}
+        </button>
+      </form>
+
+      <h1>Past Queries</h1>
+      <div className="board-layout">
+        {displayQueries.length > 0 ? (
+          displayQueries.map((query, index) => (
+            <div key={index} className="sticky-container" onClick={() => openPopup(query)}>
+              <div className="sticky-outer">
+                <div className="sticky">
+                  <div className="sticky-content">
+                    <div className="sticky-info-layout">
+                      <h2 className="sticky-info-head">Query {index + 1}</h2>
+                      <div className="sticky-info">
+                        <strong>Query:</strong> {query.queryText}
+                      </div>
+                      <div className="sticky-info">
+                        <strong>Reply:</strong> {query.replyText ? query.replyText : 'No reply yet.'}
+                      </div>
                     </div>
-                ))
-            ) : (
-                <p>No past queries found.</p>
-            )}
-        </div>
-    );
-};
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No past queries found.</p>
+        )}
+      </div>
 
-export default StudentQueryPage;
+      {selectedQuery && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <span className="popup-close" onClick={closePopup}>&times;</span>
+            <h2>Query {displayQueries.indexOf(selectedQuery) + 1}</h2>
+            <p><strong>Query:</strong> {selectedQuery.queryText}</p>
+            <p><strong>Reply:</strong> {selectedQuery.replyText || 'No reply yet.'}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
