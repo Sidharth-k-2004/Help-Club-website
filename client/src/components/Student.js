@@ -154,15 +154,41 @@ export default function StudentQueryPage() {
     fetchQueries();
   }, []);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   try {
+  //     const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
+  //     console.log("Response from Post:", response.data);
+      
+  //     // Update the queries state with the new query
+  //     setQueries(prevQueries => [response.data, ...prevQueries]);
+      
+  //     setNewQuery('');
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
       const response = await axios.post('http://localhost:5000/post-query', { queryText: newQuery });
+  
+      // Log response to see what data you're receiving
       console.log("Response from Post:", response.data);
       
-      // Update the queries state with the new query
-      setQueries(prevQueries => [response.data, ...prevQueries]);
+      // Ensure prevQueries is always an array and add the new query
+      setQueries(prevQueries => {
+        const updatedQueries = Array.isArray(prevQueries) ? [response.data, ...prevQueries] : [response.data];
+  
+        // Log the updated queries to see if the state is correctly updated
+        console.log("Updated Queries:", updatedQueries);
+  
+        return updatedQueries;
+      });
       
       setNewQuery('');
     } catch (err) {
@@ -171,6 +197,9 @@ export default function StudentQueryPage() {
       setIsSubmitting(false);
     }
   };
+  
+  
+  
 
   const openPopup = (query) => {
     setSelectedQuery(query);
