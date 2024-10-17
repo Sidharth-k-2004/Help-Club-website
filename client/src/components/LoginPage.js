@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
-import './LoginPage.css';  // Import CSS for styling
-
+import {  Link,useNavigate } from 'react-router-dom';
+import './LoginPage.css'; 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -87,8 +86,8 @@ function Login() {
 
           <button type="submit" className="login-btn">Login</button>
 
-          <div className="signup" >
-            Do not have an account? <a href="#">Signup</a>
+          <div className="signup">
+            Do not have an account? <Link to="/signup">Signup</Link>
           </div>
 
           <div className="forgot-password">

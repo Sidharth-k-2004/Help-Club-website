@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import {useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './LoginPage.css';  // Import CSS for styling
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();  // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +85,7 @@ function Signup() {
           <button type="submit" className="login-btn">Signup</button>
 
           <div className="signup">
-            Already have an account? <a href="#">Login</a>
+            Already have an account? <Link to="/">Login</Link>
           </div>
 
           <div className="forgot-password">
